@@ -4,11 +4,13 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY tsconfig.json tsconfig.json 
 
 RUN npm i -g pnpm
 RUN pnpm i
 
-COPY . .
+COPY apps/payments apps/payments
+COPY libs libs
 
 RUN pnpm run build
 
