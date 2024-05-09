@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { PaymentsController } from './payments.controller'
-import { PaymentsService } from './PaymentsService'
+import { PaymentsService } from './payments.service'
 
 describe('PaymentsController', () => {
   let paymentsController: PaymentsController
@@ -12,11 +12,5 @@ describe('PaymentsController', () => {
     }).compile()
 
     paymentsController = app.get<PaymentsController>(PaymentsController)
-  })
-
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(paymentsController.getHello()).toBe('Hello World!')
-    })
   })
 })
