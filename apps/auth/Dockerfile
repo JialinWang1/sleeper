@@ -13,6 +13,8 @@ RUN pnpm i
 COPY apps/auth apps/auth
 COPY libs libs
 
+RUN cd apps/auth && pnpm i
+
 RUN pnpm run build auth
 
 FROM node:alpine as production
