@@ -7,8 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-     - name: Use Docker Login from Repo A
-       uses: JialinWang1/actions/.github/workflows/docker-login.yml@v1
+      - name: docker login
+        uses: actions/workflow-call@v4
+        with:
+          workflow_file: JialinWang1/actions/.github/workflows/docker-login.yml@v1
        
   docker:
     runs-on: ubuntu-latest
