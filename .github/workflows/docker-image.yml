@@ -6,7 +6,8 @@ on:
 jobs:
   build:
     uses: JialinWang1/actions/.github/workflows/docker-login.yml@main
-    secrets: inherit
+    secrets: 
+      envPAT: ${{ secrets.DOCKERHUB_TOKEN }}, ${{ secrets.DOCKERHUB_USERNAME }}
     
   docker:
     needs: build
