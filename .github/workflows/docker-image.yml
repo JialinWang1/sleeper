@@ -5,12 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: docker login
-        uses: actions/workflow-call@v4
-        with:
-          workflow_file: JialinWang1/actions/.github/workflows/docker-login.yml@v1
+    uses: JialinWang1/actions/.github/workflows/docker-login.yml@v1
        
   docker:
     runs-on: ubuntu-latest
