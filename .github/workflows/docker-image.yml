@@ -6,8 +6,10 @@ on:
 jobs:
   build:
     uses: JialinWang1/actions/.github/workflows/docker-login.yml@main
-       
+    secrets: inherit
+    
   docker:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: run docker
