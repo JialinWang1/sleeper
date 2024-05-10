@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    uses: JialinWang1/actions/.github/workflows/docker-login.yml@v1
+    uses: JialinWang1/actions/.github/workflows/docker-login.yml@main
        
   docker:
     runs-on: ubuntu-latest
