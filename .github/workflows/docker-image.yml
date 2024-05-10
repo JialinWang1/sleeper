@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     uses: JialinWang1/actions/.github/workflows/docker-login.yml@main
-    with:
+    secrets:
       token: ${{ secrets.DOCKERHUB_TOKEN }}
       username: ${{ secrets.DOCKERHUB_USERNAME }}
       
