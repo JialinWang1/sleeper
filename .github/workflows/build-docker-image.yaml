@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: build image
-        run: docker build -t garrinwang/sleeper-reservations -f apps/reservations/Dockerfile .
+        run: docker build -t garrinwang/sleeper-reservations:${{github.run_number}} -f apps/reservations/Dockerfile .
 
       - name: push image
-        run: docker push garrinwang/sleeper-reservations:reservations-production
+        run: docker push garrinwang/sleeper-reservations:${{github.run_number}}
