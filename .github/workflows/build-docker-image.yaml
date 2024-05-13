@@ -11,9 +11,6 @@ jobs:
         run: |
           echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_OUTPUT
 
-      - name: checks docker image list
-        run: docker images
-
       - name: test
         run: echo "name=${{ secrets.DOCKERHUB_USERNAME }}"
 
