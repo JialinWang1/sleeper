@@ -19,6 +19,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: pull docker image list
+        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}
 
       - name: checks docker image list
         run: docker images
