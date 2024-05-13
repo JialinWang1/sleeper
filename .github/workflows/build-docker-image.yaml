@@ -32,7 +32,7 @@ jobs:
           context: .
           file: apps/reservations/Dockerfile
           push: true
-          tags: garrinwang/sleeper-reservations:$(date +%s)
+          tags: garrinwang/sleeper-reservations:latest
 
       # - name: build image
       #   run: docker build -t garrinwang/sleeper-reservations:$(date +%s) -f apps/reservations/Dockerfile .
