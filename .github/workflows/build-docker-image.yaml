@@ -5,7 +5,7 @@ on:
 
 jobs:
   build_reservations:
-    uses: JialinWang1/actions/.github/workflows/build_and_push_docker_image.yml@main
+    uses: JialinWang1/actions/.github/workflows/build_and_push_docker_image.yml@v2
     with:
       docker_file: 'apps/reservations/Dockerfile'
       tag: 'garrinwang/sleeper-reservations:latest'
