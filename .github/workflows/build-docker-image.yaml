@@ -12,3 +12,30 @@ jobs:
     secrets:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
+  build_auth:
+    uses: JialinWang1/actions/.github/workflows/build_and_push_docker_image.yml@v2
+    with:
+      docker_file: 'apps/auth/Dockerfile'
+      tag: 'garrinwang/sleeper-auth:latest'
+    secrets:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
+  build_payments:
+    uses: JialinWang1/actions/.github/workflows/build_and_push_docker_image.yml@v2
+    with:
+      docker_file: 'apps/payments/Dockerfile'
+      tag: 'garrinwang/sleeper-payments:latest'
+    secrets:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
+  build_notifications:
+    uses: JialinWang1/actions/.github/workflows/build_and_push_docker_image.yml@v2
+    with:
+      docker_file: 'apps/notifications/Dockerfile'
+      tag: 'garrinwang/sleeper-notifications:latest'
+    secrets:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
