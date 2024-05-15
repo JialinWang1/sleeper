@@ -2,16 +2,20 @@ import Joi from 'joi'
 import { Module } from '@nestjs/common'
 import { ReservationsService } from './reservations.service'
 import { ReservationsController } from './reservations.controller'
-import { DatabaseModule, HealthModule, LoggerModule, PAYMENT_SERVICE } from '@app/common'
+import {
+  DatabaseModule,
+  HealthModule,
+  LoggerModule,
+  PAYMENT_SERVICE,
+  AUTH_SERVICE
+} from '@app/common'
 import { ReservationRepository } from './reservations.repository'
 import { ReservationDocument, ReservationSchema } from './models/reservation.schema'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ClientsModule, Transport } from '@nestjs/microservices'
-import { AUTH_SERVICE } from '@app/common'
 
 @Module({
   imports: [
-    HealthModule,
     DatabaseModule,
     DatabaseModule.forFeature([{ name: ReservationDocument.name, schema: ReservationSchema }]),
     LoggerModule,
@@ -49,7 +53,8 @@ import { AUTH_SERVICE } from '@app/common'
         }),
         inject: [ConfigService]
       }
-    ])
+    ]),
+    HealthModule
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationRepository]
