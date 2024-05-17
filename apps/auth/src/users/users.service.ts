@@ -2,31 +2,33 @@ import { Injectable, UnauthorizedException, UnprocessableEntityException } from 
 import { CreateUserDto } from './dto/create-user.dto'
 import { UsersRepository } from './users.repository'
 import bcrypt from 'bcryptjs'
-import { log } from 'console'
 import { GetUserDto } from './dto/get-user.dto'
+import { User } from '@app/common'
+import { Role } from '@app/common/models/role.entity'
 
 @Injectable()
 export class UsersService {
   constructor(private readonly userRepository: UsersRepository) {}
 
   async getUser(getUserDto: GetUserDto) {
-    return this.userRepository.findOne(getUserDto)
+    return this.userRepository.findOne(getUserDto, { roles: true })
   }
 
   async create(createUserDto: CreateUserDto) {
-    await this.validateCreateUserDto(createUserDto)
+    await this.validateCreateUser(createUserDto)
 
     const password = await bcrypt.hash(createUserDto.password, 10)
-
-    return this.userRepository.create({
+    const newUser = new User({
       ...createUserDto,
-      password
+      password,
+      roles: createUserDto.roles?.map((roleDto) => new Role(roleDto))
     })
+    return this.userRepository.create(newUser)
   }
 
-  async validateCreateUserDto(createUserDto: CreateUserDto) {
+  async validateCreateUser(createUser: CreateUserDto) {
     try {
-      await this.userRepository.findOne({ email: createUserDto.email })
+      await this.userRepository.findOne({ email: createUser.email })
     } catch (error) {
       return
     }

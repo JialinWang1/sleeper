@@ -8,8 +8,8 @@ import {
 import { catchError, map, Observable, of, tap } from 'rxjs'
 import { AUTH_SERVICE } from '../constants/services'
 import { ClientProxy } from '@nestjs/microservices'
-import { UserDto } from '../dto'
 import { Reflector } from '@nestjs/core'
+import { User } from '../models'
 
 export class JwtAuthGuard implements CanActivate {
   private readonly logger = new Logger(JwtAuthGuard.name)
@@ -27,15 +27,17 @@ export class JwtAuthGuard implements CanActivate {
     const roles = this.reflector.get<string[]>('roles', context.getHandler())
 
     return this.authClient
-      .send<UserDto>('authenticate', {
+      .send<User>('authenticate', {
         Authentication: jwt
       })
       .pipe(
         tap((res) => {
-          for (const role of roles) {
-            if (!res.roles?.includes(role)) {
-              this.logger.log(`User ${res.email} doesn't have role ${role}`)
-              throw new UnauthorizedException()
+          if (roles) {
+            for (const role of roles) {
+              if (!res.roles?.map((role) => role.name).includes(role)) {
+                this.logger.log(`User ${res.email} doesn't have role ${role}`)
+                throw new UnauthorizedException()
+              }
             }
           }
           context.switchToHttp().getRequest().user = res

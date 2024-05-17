@@ -10,19 +10,18 @@ import {
   AUTH_SERVICE
 } from '@app/common'
 import { ReservationRepository } from './reservations.repository'
-import { ReservationDocument, ReservationSchema } from './models/reservation.schema'
+import { Reservation } from './models/reservation.entity'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 
 @Module({
   imports: [
     DatabaseModule,
-    DatabaseModule.forFeature([{ name: ReservationDocument.name, schema: ReservationSchema }]),
+    DatabaseModule.forFeature([Reservation]),
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        DATABASE_URI: Joi.string().required(),
         PORT: Joi.number().required(),
         AUTH_HOST: Joi.string().required(),
         AUTH_PORT: Joi.number().required(),
