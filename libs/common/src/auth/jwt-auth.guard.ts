@@ -14,7 +14,6 @@ import { User } from '../models'
 export class JwtAuthGuard implements CanActivate {
   private readonly logger = new Logger(JwtAuthGuard.name)
 
-  private readonly AUTH_SERVICE = 'AUTH_SERVICE'
   constructor(
     @Inject(AUTH_SERVICE) private readonly authClient: ClientProxy,
     private readonly reflector: Reflector
@@ -34,7 +33,7 @@ export class JwtAuthGuard implements CanActivate {
         tap((res) => {
           if (roles) {
             for (const role of roles) {
-              if (!res.roles?.map((role) => role.name).includes(role)) {
+              if (!res.roles?.map((role) => role.name).includes(role.toLowerCase())) {
                 this.logger.log(`User ${res.email} doesn't have role ${role}`)
                 throw new UnauthorizedException()
               }

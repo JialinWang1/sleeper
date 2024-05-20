@@ -10,6 +10,7 @@ export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
   @Post()
+  @Roles('Admin')
   async create(@Body() createReservationDto: CreateReservationDto, @CurrentUser() user: User) {
     return this.reservationsService.create(createReservationDto, user)
   }

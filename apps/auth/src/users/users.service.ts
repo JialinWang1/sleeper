@@ -11,6 +11,7 @@ export class UsersService {
   constructor(private readonly userRepository: UsersRepository) {}
 
   async getUser(getUserDto: GetUserDto) {
+    console.log('validate2')
     return this.userRepository.findOne(getUserDto, { roles: true })
   }
 
