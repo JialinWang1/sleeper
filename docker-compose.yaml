@@ -44,5 +44,9 @@ services:
       - ./apps/notifications/.env
     volumes:
       - .:/usr/src/app
-  mongo:
-    image: mongo
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 123456

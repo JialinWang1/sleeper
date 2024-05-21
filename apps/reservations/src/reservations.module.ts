@@ -9,15 +9,12 @@ import {
   PAYMENT_SERVICE,
   AUTH_SERVICE
 } from '@app/common'
-import { ReservationRepository } from './reservations.repository'
-import { ReservationDocument, ReservationSchema } from './models/reservation.schema'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ClientsModule, Transport } from '@nestjs/microservices'
+import { PrismaService } from './prisma.service'
 
 @Module({
   imports: [
-    DatabaseModule,
-    DatabaseModule.forFeature([{ name: ReservationDocument.name, schema: ReservationSchema }]),
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -57,6 +54,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices'
     HealthModule
   ],
   controllers: [ReservationsController],
-  providers: [ReservationsService, ReservationRepository]
+  providers: [ReservationsService, PrismaService]
 })
 export class ReservationsModule {}

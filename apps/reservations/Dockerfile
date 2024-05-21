@@ -13,6 +13,7 @@ RUN pnpm i
 COPY apps/reservations apps/reservations
 COPY libs libs
 
+RUN cd apps/auth && pnpm i
 RUN pnpm run build reservations
 
 FROM node:alpine as production
