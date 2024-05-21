@@ -32,10 +32,12 @@ export class JwtAuthGuard implements CanActivate {
       })
       .pipe(
         tap((res) => {
-          for (const role of roles) {
-            if (!res.roles?.includes(role)) {
-              this.logger.log(`User ${res.email} doesn't have role ${role}`)
-              throw new UnauthorizedException()
+          if (roles) {
+            for (const role of roles) {
+              if (!res.roles?.includes(role)) {
+                this.logger.log(`User ${res.email} doesn't have role ${role}`)
+                throw new UnauthorizedException()
+              }
             }
           }
           context.switchToHttp().getRequest().user = res
